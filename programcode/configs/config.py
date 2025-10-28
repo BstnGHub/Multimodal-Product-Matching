@@ -37,9 +37,7 @@ class Config:
     training_verbose: Optional[int] = None
     data_id: Optional[str] = None
 
-    parallel_run: Optional[int] = None
     output_folder: Optional[str] = None
-    path_to_load_model_from: Optional[str] = None
     dir_prefix_id: Optional[str] = None
 
     early_stopping_monitor: Optional[str] = None
@@ -55,7 +53,6 @@ class Config:
     image_optimizer: Optional[str] = None
     text_optimizer: Optional[str] = None
     text_model_activate_second_training: Optional[bool] = None
-    only_compile_text_model_learning_rate: Optional[float] = None
 
     text_architecture_bilstm_units: Optional[int] = None
     text_architecture_dropout1: Optional[float] = None
@@ -273,9 +270,7 @@ def write_config_changes_into_json_file(path_to_model_config_json, adjustments_b
             data["training_verbose"] = config.training_verbose
             data["data_id"] = config.data_id
 
-            data["parallel_run"] = config.parallel_run
             data["output_folder"] = config.output_folder
-            data["path_to_load_model_from"] = config.path_to_load_model_from
             data["dir_prefix_id"] = config.dir_prefix_id
 
             data["early_stopping_monitor"] = config.early_stopping_monitor
@@ -291,7 +286,6 @@ def write_config_changes_into_json_file(path_to_model_config_json, adjustments_b
             data["image_optimizer"] = config.image_optimizer
             data["text_optimizer"] = config.text_optimizer
             data["text_model_activate_second_training"] = config.text_model_activate_second_training
-            data["only_compile_text_model_learning_rate"] = config.only_compile_text_model_learning_rate
 
             data["text_architecture_bilstm_units"] = config.text_architecture_bilstm_units
             data["text_architecture_dropout1"] = config.text_architecture_dropout1
