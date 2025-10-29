@@ -8,7 +8,7 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 import time
 
 # Load dataset
-_, _, test_data = pickle.load(open("promap_data.pickle", "rb"))
+_, _, test_data = pickle.load(open("datasets/promap_data.pickle", "rb"))
 
 text_pairs = test_data["text_pairs"]
 image_pairs = test_data["image_pairs"]

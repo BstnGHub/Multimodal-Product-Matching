@@ -10,7 +10,7 @@ def load_wdc_shoes_data():
     Load WDC Shoes dataset from pickle file
     """
 
-    train_data, val_data, test_data = pickle.load(open("wdc_shoes_data.pickle", "rb"))
+    train_data, val_data, test_data = pickle.load(open("datasets/wdc_shoes_data.pickle", "rb"))
 
     return train_data, val_data, test_data
 
@@ -18,7 +18,7 @@ def load_zalando_data():
     """
     Load Zalando dataset from pickle file
     """
-    train_data, val_data, test_data = pickle.load(open("zalando_data.pickle", "rb"))
+    train_data, val_data, test_data = pickle.load(open("datasets/zalando_data.pickle", "rb"))
 
     return train_data, val_data, test_data
 
@@ -26,7 +26,7 @@ def load_promap_data():
     """
     Load ProMap dataset from pickle file
     """
-    train_data, val_data, test_data = pickle.load(open("promap_data.pickle", "rb"))
+    train_data, val_data, test_data = pickle.load(open("datasets/promap_data.pickle", "rb"))
 
     return train_data, val_data, test_data
 
@@ -58,7 +58,7 @@ def get_class_weights(data_id):
 
 
 # Load and preprocess images
-def preprocess_image(filename, height, width, data_id=None):
+def preprocess_image(filename, height, width):
     """"
     Load and preprocess images
     """
@@ -239,9 +239,9 @@ class BatchGenerator(tf.keras.utils.Sequence):
 
         if self.model_id == "Siamese" or self.model_id == "Intermediate Fusion":
 
-            images_1 = [preprocess_image(image_pair[0], self.image_height, self.image_width, self.data_id) for image_pair in
+            images_1 = [preprocess_image(image_pair[0], self.image_height, self.image_width) for image_pair in
                             image_pairs]
-            images_2 = [preprocess_image(image_pair[1], self.image_height, self.image_width, self.data_id) for image_pair in
+            images_2 = [preprocess_image(image_pair[1], self.image_height, self.image_width) for image_pair in
                             image_pairs]
 
             inputs += [np.array(images_1, dtype="float32"), np.array(images_2, dtype="float32")]
