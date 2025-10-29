@@ -2,6 +2,7 @@ import pickle
 import tensorflow as tf
 import transformers
 import numpy as np
+from pathlib import Path
 from PIL import Image
 from configs.config import Config
 
@@ -62,7 +63,17 @@ def preprocess_image(filename, height, width):
     """"
     Load and preprocess images
     """
-    with Image.open(filename) as img:
+    file_path = Path(filename)
+    if not file_path.exists() and not file_path.is_absolute():
+        alt_path = Path("datasets") / file_path
+        if alt_path.exists():
+            file_path = alt_path
+        else:
+            raise FileNotFoundError(f"Image file not found: {file_path} (also checked {alt_path})")
+    elif not file_path.exists():
+        raise FileNotFoundError(f"Image file not found: {file_path}")
+
+    with Image.open(str(file_path)) as img:
         # Force three channels so the batcher always yields consistent shape.
         if img.mode == "P" and "transparency" in img.info:
             img = img.convert("RGBA")
